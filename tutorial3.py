@@ -43,8 +43,12 @@ def reverse(b):
 def step():
     if ball.go:
         ball.x += ball.direction
+        ball.y +=1
         if ball.x + ball.width > myapp.width or ball.x < 0:
             ball.x -= ball.direction
+            reverse(ball)
+        if ball.y + ball.height > myapp.height or ball.y < 0:
+            ball.y -= ball.direction
             reverse(ball)
             
 def spaceKey(event):
