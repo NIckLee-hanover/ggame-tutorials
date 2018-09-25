@@ -52,7 +52,6 @@ def spaceKey(event):
     
 def reverseKey(event):
     reverse(ball)
-    pop.play()
     
 def mouseClick(event):
     ball.x = event.x
