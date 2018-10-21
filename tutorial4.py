@@ -12,10 +12,15 @@ class SpaceShip(Sprite):
         self.vx = 1
         self.vy = 1
         self.vr = 0.01
-        def step(self):
-            self.x += self.vx
-            self.y += self.vy
-            self.rotation += self.vr    
+        
+    def step(self):
+        self.x += self.vx
+        self.y += self.vy
+        self.rotation += self.vr    
+    
+    def step(self):
+        for ship in self.getSpritesbyClass(SpaceShip):
+            ship.step()
         
         
 class SpaceGame(App):
