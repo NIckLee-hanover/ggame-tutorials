@@ -5,11 +5,12 @@ class SpaceShip(Sprite):
     """
     Animated space ship
     """
-    asset = ImageAsset("images/four_spaceship_by_albertov_with_thrust.png", 
+    ship = ImageAsset("images/four_spaceship_by_albertov_with_thrust.png", 
         Frame(227,0,65,125), 4, 'vertical')
-
+    blast = ImageAsset("images/blast.png",
+        Frame(0,0,10,10), 6, 'horizontal')
     def __init__(self, position):
-        super().__init__(SpaceShip.asset, position)
+        super().__init__(SpaceShip.ship, position)
         self.vx = 0
         self.vy = 0
         self.vr = 0
@@ -22,6 +23,7 @@ class SpaceShip(Sprite):
         SpaceGame.listenKeyEvent("keyup", "right arrow", self.rotRstop)
         SpaceGame.listenKeyEvent("keydown", "left arrow", self.rotLgo)
         SpaceGame.listenKeyEvent("keyup", "left arrow", self.rotRstop)
+        
         SpaceGame.listenKeyEvent("keyup", "w", self.up)
         SpaceGame.listenKeyEvent("keydown", "w", self.down)
         SpaceGame.listenKeyEvent("keyup", "a", self.right)
@@ -65,19 +67,20 @@ class SpaceShip(Sprite):
         
     def up(self, event):
         if self.vy < 1:
-            self.vy += 0.1
+            self.vy += 0.2
             
     def down(self, event):
         if self.vy > -1:
-            self.vy -= 0.1
+            self.vy -= 0.2
             
     def right(self, event):
         if self.vx < 1:
-            self.vx += 0.1
+            self.vx += 0.2
 
     def left(self, event):
-        if self.vx > 1:
-            self.vx -= 0.1
+        if self.vx > -1:
+            self.vx -= 0.2
+            
 class SpaceGame(App):
     """
     Tutorial4 space game example.
@@ -91,7 +94,7 @@ class SpaceGame(App):
         bg = Sprite(bg_asset, (0,0))
         SpaceShip((100,100))
         SpaceShip((150,150))
-        SpaceShip((200,50))
+        SpaceShip((200,200))
         
     def step(self):
         for ship in self.getSpritesbyClass(SpaceShip):
