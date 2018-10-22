@@ -1,5 +1,6 @@
 
 from ggame import App, RectangleAsset, ImageAsset, Sprite, LineStyle, Color, Frame
+#keysused = ["right arrow", "left arrow", "W", "A", "S", "D", "space"]
 class SpaceShip(Sprite):
     """
     Animated space ship
@@ -9,17 +10,26 @@ class SpaceShip(Sprite):
 
     def __init__(self, position):
         super().__init__(SpaceShip.asset, position)
-        self.vx = 1
-        self.vy = 1
+        self.vx = 0
+        self.vy = 0
         self.vr = 0
         self.thrust = 0
         self.thrustframe = 1
         SpaceGame.listenKeyEvent("keydown", "space", self.thrustOn)
         SpaceGame.listenKeyEvent("keyup", "space", self.thrustOff)
+        
         SpaceGame.listenKeyEvent("keydown", "right arrow", self.rotRgo)
         SpaceGame.listenKeyEvent("keyup", "right arrow", self.rotRstop)
         SpaceGame.listenKeyEvent("keydown", "left arrow", self.rotLgo)
         SpaceGame.listenKeyEvent("keyup", "left arrow", self.rotRstop)
+        SpaceGame.listenKeyEvent("keyup", "w", self.up)
+        SpaceGame.listenKeyEvent("keydown", "w", self.down)
+        SpaceGame.listenKeyEvent("keyup", "a", self.right)
+        SpaceGame.listenKeyEvent("keydown", "a", self.left)
+        SpaceGame.listenKeyEvent("keyup", "s", self.down)
+        SpaceGame.listenKeyEvent("keydown", "s", self.up)
+        SpaceGame.listenKeyEvent("keyup", "d", self.left)
+        SpaceGame.listenKeyEvent("keydown", "d", self.right)
         self.fxcenter = self.fycenter = 0.5
         
     def step(self):
@@ -34,7 +44,7 @@ class SpaceShip(Sprite):
                 self.thrustframe = 1
         else:
             self.setImage(0)
-            
+
     def thrustOn(self, event):
         self.thrust = 1
         
@@ -42,14 +52,32 @@ class SpaceShip(Sprite):
         self.thrust = 0
     
     def rotRgo(self, event):
-        print()
-    def rotRstop(self, event):
-        print()
-    def rotLgo(self, event):
-        print()
-    def rotLstop(self, event):
-        print()
+        self.vr = -0.05
         
+    def rotRstop(self, event):
+        self.vr = 0
+        
+    def rotLgo(self, event):
+        self.vr = 0.05
+        
+    def rotLstop(self, event):
+        self.vr = 0
+        
+    def up(self, event):
+        if self.vy < 1:
+            self.vy += 0.1
+            
+    def down(self, event):
+        if self.vy > -1:
+            self.vy -= 0.1
+            
+    def right(self, event):
+        if self.vx < 1:
+            self.vx += 0.1
+
+    def left(self, event):
+        if self.vx > 1:
+            self.vx -= 0.1
 class SpaceGame(App):
     """
     Tutorial4 space game example.
