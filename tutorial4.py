@@ -40,7 +40,15 @@ class SpaceShip(Sprite):
         
     def thrustOff(self, event):
         self.thrust = 0
-            
+    
+    def rotRgo(self, event):
+        print()
+    def rotRstop(self, event):
+        print()
+    def rotLgo(self, event):
+        print()
+    def rotLstop(self, event):
+        print()
         
 class SpaceGame(App):
     """
