@@ -90,7 +90,7 @@ class blast(Sprite):
         Frame(0,0,10,10), 6, 'horizontal')
         
     def __init__(blast, position):
-        super().__init__(blast.ship, position)
+        super().__init__(blast.boom, position)
         
         self.blastframe = 1
         self.blastgo = 0
@@ -106,6 +106,8 @@ class blast(Sprite):
             self.blastframe += 1
             if self.blsatframe == 6:
                 self.blastframe = 1
+        else:
+            self.setImage(0)
     def blastOn(self, event):
         blastgo = 1
         
@@ -130,11 +132,10 @@ class SpaceGame(App):
     def step(self):
         for ship in self.getSpritesbyClass(SpaceShip):
             ship.step()
-                
-                
-    def step(self):
-        for ship in self.getSpritesbyClass(SpaceShip):
-            ship.step()
+            
+    def yeet(self):
+        for boom in self.getSpritebyClass(blast):
+            boom.yeet()
             
 myapp = SpaceGame()
 
