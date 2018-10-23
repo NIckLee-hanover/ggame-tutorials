@@ -80,11 +80,6 @@ class SpaceShip(Sprite):
         if self.vx > -1:
             self.vx -= 0.2
     
-    def blastOn(self, event):
-        self.blast = 1
-    
-    def blastOff(self, event):
-        self.blast = 0
 class blast(Sprite):
     boom = ImageAsset("images/blast.png",
         Frame(0,0,10,10), 6, 'horizontal')
@@ -108,11 +103,12 @@ class blast(Sprite):
                 self.blastframe = 1
         else:
             self.setImage(0)
+    
     def blastOn(self, event):
-        blastgo = 1
+        self.blastgo = 1
         
     def blastOff(self, event):
-        blastgo = 0
+        self.blastgo = 0
     
 class SpaceGame(App):
     """
@@ -134,7 +130,7 @@ class SpaceGame(App):
             ship.step()
             
     def yeet(self):
-        for boom in self.getSpritebyClass(blast):
+        for boom in self.getSpritesbyClass(blast):
             boom.yeet()
             
 myapp = SpaceGame()
