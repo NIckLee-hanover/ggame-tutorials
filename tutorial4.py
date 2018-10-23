@@ -7,8 +7,7 @@ class SpaceShip(Sprite):
     """
     ship = ImageAsset("images/four_spaceship_by_albertov_with_thrust.png", 
         Frame(227,0,65,125), 4, 'vertical')
-    blast = ImageAsset("images/blast.png",
-        Frame(0,0,10,10), 6, 'horizontal')
+        
     def __init__(self, position):
         super().__init__(SpaceShip.ship, position)
         self.vx = 0
@@ -80,7 +79,39 @@ class SpaceShip(Sprite):
     def left(self, event):
         if self.vx > -1:
             self.vx -= 0.2
-            
+    
+    def blastOn(self, event):
+        self.blast = 1
+    
+    def blastOff(self, event):
+        self.blast = 0
+class blast(Sprite):
+    boom = ImageAsset("images/blast.png",
+        Frame(0,0,10,10), 6, 'horizontal')
+        
+    def __init__(blast, position):
+        super().__init__(blast.ship, position)
+        
+        self.blastframe = 1
+        self.blastgo = 0
+        SpaceGame.listenKeyEvent("keydown", "enter", self.blastOn)
+        SpaceGame.listenKeyEvent("keyup", "enter", self.blastOff)
+        self.fxcenter = self.fycenter = 0.5
+        
+    def yeet(self):
+        self.x = random(0, self.width)
+        self.y = random(0, self.height)
+        if blastgo == 1:
+            self.setImage(self.blastframe)
+            self.blastframe += 1
+            if self.blsatframe == 6:
+                self.blastframe = 1
+    def blastOn(self, event):
+        blastgo = 1
+        
+    def blastOff(self, event):
+        blastgo = 0
+    
 class SpaceGame(App):
     """
     Tutorial4 space game example.
