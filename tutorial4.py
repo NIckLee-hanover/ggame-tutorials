@@ -114,13 +114,12 @@ class blast(Sprite):
                 if self.blastframe == 7:
                     self.blastframe = 1
 
-
-  
     def blastOn(self, event):
         self.blastgo = 1
 
     def blastOff(self, event):
         self.blastgo = 0
+        
 class SpaceGame(App):
     """
     Tutorial4 space game example.
@@ -133,19 +132,19 @@ class SpaceGame(App):
         bg_asset = RectangleAsset(self.width, self.height, noline, black)
         bg = Sprite(bg_asset, (0,0))
 
-    
         SpaceShip((100,100))
         SpaceShip((150,150))
         SpaceShip((200,200))
         blast((-10,-10))
+        
     def step(self):
-
         for ship in self.getSpritesbyClass(SpaceShip):
             ship.step(self.width, self.height)
 
         for boom in self.getSpritesbyClass(blast):
             boom.step(self.width, self.height)
             boom.scale = 5
+
 myapp = SpaceGame()
 
 myapp.run()
