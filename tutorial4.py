@@ -1,4 +1,4 @@
-
+from random import randint
 from ggame import App, RectangleAsset, ImageAsset, Sprite, LineStyle, Color, Frame
 #keysused = ["right arrow", "left arrow", "W", "A", "S", "D", "space"]
 
@@ -96,11 +96,16 @@ class blast(Sprite):
         self.y += 0
         self.setImage(self.blastframe)
         if self.blastgo == 1:
-            self.newx = random(0, self.width)
-            self.newy = random(0, self.height)
             print('asodfas0)')
+            self.newx = randint(0,10)
+            self.newy = 1
             self.setImage(self.blastframe)
-            print('asodfas0)')
+            self.blastframe += 1
+            if self.blastframe == 7:
+                self.blastframe = 3
+        else:
+            self.setImage(0)
+
 
   
     def blastOn(self, event):
