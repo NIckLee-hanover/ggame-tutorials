@@ -88,24 +88,26 @@ class blast(Sprite):
         self.newy = 0
         self.blastgo = 0
         self.blastframe = 1
+        sefl.setframe
         SpaceGame.listenKeyEvent("keydown", "e", self.blastOn)
-        SpaceGame.listenKeyEvent("keyup", "e", self.blastOff)
 
     def step(self):
-        self.x += 0
-        self.y += 0
         self.setImage(self.blastframe)
         if self.blastgo == 1:
-            print('asodfas0)')
-            self.newx = randint(0,10)
-            self.newy = 1
+            if self.setframe <= 21:
+                self.x = self.newx
+                self.y = self.newy
+            if self.setframe == 21:    
+                self.newx = randint(10, 400)
+                self.newy = randint(10, 400)
             self.setImage(self.blastframe)
             self.blastframe += 1
             if self.blastframe == 7:
                 self.blastframe = 3
         else:
             self.setImage(0)
-
+            self.x = (self.width -20)
+            self.y = (self.height -20)
 
   
     def blastOn(self, event):
@@ -121,6 +123,8 @@ class SpaceGame(App):
     def __init__(self):
         super().__init__()
         # Background
+        neww = self.width
+        newh = self.height
         black = Color(0, 1)
         noline = LineStyle(0, black)
         bg_asset = RectangleAsset(self.width, self.height, noline, black)
@@ -134,13 +138,13 @@ class SpaceGame(App):
         blast((200,200))
     
     def step(self):
-        print('s')
+
         for ship in self.getSpritesbyClass(SpaceShip):
             ship.step()
-            #print('a2')
+
         for boom in self.getSpritesbyClass(blast):
             boom.step()
-            #print('r')
+
 myapp = SpaceGame()
 
 myapp.run()
