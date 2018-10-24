@@ -118,7 +118,6 @@ class blast(Sprite):
 
     def blastOff(self, event):
         self.blastgo = 0
-        
 class SpaceGame(App):
     """
     Tutorial4 space game example.
