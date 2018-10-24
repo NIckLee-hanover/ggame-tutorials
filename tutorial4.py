@@ -97,8 +97,8 @@ class blast(Sprite):
             if self.setframe == 21: 
                 self.blastgo = 0
                 self.setframe = 0
-                self.newx = 900#randint(10, 1000)
-                self.newy = 520#randint(10, 400)
+                self.newx = randint(10, 900)
+                self.newy = randint(10, 520)
                 self.setImage(0)
                 self.x = -10
                 self.y = -10
