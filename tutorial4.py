@@ -66,19 +66,19 @@ class SpaceShip(Sprite):
         self.vr = 0
         
     def up(self, event):
-        if self.vy < 1:
+        if self.vy < 2:
             self.vy += 0.2
             
     def down(self, event):
-        if self.vy > -1:
+        if self.vy > -2:
             self.vy -= 0.2
             
     def right(self, event):
-        if self.vx < 1:
+        if self.vx < 2:
             self.vx += 0.2
 
     def left(self, event):
-        if self.vx > -1:
+        if self.vx > -2:
             self.vx -= 0.2
 class blast(Sprite):
     boom = ImageAsset("images/blast.png",
@@ -97,7 +97,7 @@ class blast(Sprite):
     def step(self, w, h):
         self.setImage(self.blastframe)
         if self.blastgo == 1:
-            if self.setframe == 21: 
+            if self.setframe == 40: 
                 self.blastgo = 0
                 self.setframe = 0
                 self.newx = randint(10, w)
@@ -137,7 +137,6 @@ class SpaceGame(App):
         SpaceShip((100,100))
         SpaceShip((150,150))
         SpaceShip((200,200))
-        blast((-10,-10))
         blast((-10,-10))
     def step(self):
 
