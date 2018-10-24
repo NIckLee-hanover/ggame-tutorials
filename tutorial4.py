@@ -1,10 +1,8 @@
 
 from ggame import App, RectangleAsset, ImageAsset, Sprite, LineStyle, Color, Frame
 #keysused = ["right arrow", "left arrow", "W", "A", "S", "D", "space"]
+
 class SpaceShip(Sprite):
-    """
-    Animated space ship
-    """
     ship = ImageAsset("images/four_spaceship_by_albertov_with_thrust.png", 
         Frame(227,0,65,125), 4, 'vertical')
         
@@ -45,7 +43,7 @@ class SpaceShip(Sprite):
                 self.thrustframe = 1
         else:
             self.setImage(0)
-
+        
     def thrustOn(self, event):
         self.thrust = 1
         
@@ -82,28 +80,31 @@ class SpaceShip(Sprite):
     
 class blast(Sprite):
     boom = ImageAsset("images/blast.png",
-        Frame(0,0,8,8), 1,'vertical')
+        Frame(0,0,8,8), 4,'horizontal')
         
     def __init__(self, position):
         super().__init__(blast.boom, position)
         
-        self.blastframe = 4
         self.blastgo = 0
+        self.blastframe = 1
         SpaceGame.listenKeyEvent("keydown", "e", self.blastOn)
         SpaceGame.listenKeyEvent("keyup", "e", self.blastOff)
-        self.fxcenter = self.fycenter = 0.5
-    
+
+    def step(self):
+        print('a')
+        self.x += 0
+        self.y += 0
+        if self.blastgo == 1:
+            self.setImage(self.blastframe)
+        else:
+            self.setimange(0)
+
+  
     def blastOn(self, event):
         self.blastgo = 1
-        
+
     def blastOff(self, event):
         self.blastgo = 0
-    
-    def ah(self):
-        #self.x = random(0, self.width)
-        #self.y = random(0, self.height)
-        if blastgo == 1:
-            self.setImage(self.blastframe)
         
 class SpaceGame(App):
     """
@@ -116,17 +117,20 @@ class SpaceGame(App):
         noline = LineStyle(0, black)
         bg_asset = RectangleAsset(self.width, self.height, noline, black)
         bg = Sprite(bg_asset, (0,0))
+        blast((100,100))
+    
         SpaceShip((100,100))
         SpaceShip((150,150))
         SpaceShip((200,200))
-        if blastgo == 1:
-            blast((100,100))
-
+        blast((100,100))
+        
+    
     def step(self):
+        print('a')
         for ship in self.getSpritesbyClass(SpaceShip):
             ship.step()
+            print('a')
             
-  
 myapp = SpaceGame()
 
 myapp.run()
