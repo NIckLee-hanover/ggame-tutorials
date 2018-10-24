@@ -88,26 +88,29 @@ class blast(Sprite):
         self.newy = 0
         self.blastgo = 0
         self.blastframe = 1
-        sefl.setframe
+        self.setframe = 0 
         SpaceGame.listenKeyEvent("keydown", "e", self.blastOn)
 
     def step(self):
         self.setImage(self.blastframe)
         if self.blastgo == 1:
-            if self.setframe <= 21:
-                self.x = self.newx
-                self.y = self.newy
-            if self.setframe == 21:    
+            if self.setframe == 21: 
+                self.blastgo = 0
+                self.setframe = 0
                 self.newx = randint(10, 400)
                 self.newy = randint(10, 400)
-            self.setImage(self.blastframe)
-            self.blastframe += 1
-            if self.blastframe == 7:
-                self.blastframe = 3
-        else:
-            self.setImage(0)
-            self.x = (self.width -20)
-            self.y = (self.height -20)
+                self.setImage(0)
+                self.x = -10
+                self.y = -10
+            else:
+                self.x = self.newx
+                self.y = self.newy
+                self.setImage(self.blastframe)
+                self.blastframe += 1
+                self.setframe += 1
+                if self.blastframe == 7:
+                    self.blastframe = 1
+
 
   
     def blastOn(self, event):
@@ -135,7 +138,6 @@ class SpaceGame(App):
         SpaceShip((150,150))
         SpaceShip((200,200))
         blast((100,100))
-        blast((200,200))
     
     def step(self):
 
