@@ -79,7 +79,6 @@ class SpaceShip(Sprite):
             self.vx -= 0.2
     
 class blast(Sprite):
-    global neww, newh
     boom = ImageAsset("images/blast.png",
         Frame(0,0,8,8), 4,'horizontal')
         
@@ -98,8 +97,8 @@ class blast(Sprite):
             if self.setframe == 21: 
                 self.blastgo = 0
                 self.setframe = 0
-                self.newx = randint(10, neww)
-                self.newy = randint(10, 400)
+                self.newx = 900#randint(10, 1000)
+                self.newy = 520#randint(10, 400)
                 self.setImage(0)
                 self.x = -10
                 self.y = -10
@@ -127,8 +126,6 @@ class SpaceGame(App):
     def __init__(self):
         super().__init__()
         # Background
-        neww = self.width
-        newh = self.height
         black = Color(0, 1)
         noline = LineStyle(0, black)
         bg_asset = RectangleAsset(self.width, self.height, noline, black)
