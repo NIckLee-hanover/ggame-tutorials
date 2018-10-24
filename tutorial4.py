@@ -1,11 +1,11 @@
 from random import randint
+
 from ggame import App, RectangleAsset, ImageAsset, Sprite, LineStyle, Color, Frame
 #keysused = ["right arrow", "left arrow", "W", "A", "S", "D", "space"]
 
 class SpaceShip(Sprite):
     ship = ImageAsset("images/four_spaceship_by_albertov_with_thrust.png", 
         Frame(227,0,65,125), 4, 'vertical')
-        
     def __init__(self, position):
         super().__init__(SpaceShip.ship, position)
         self.vx = 0
@@ -77,28 +77,28 @@ class SpaceShip(Sprite):
     def left(self, event):
         if self.vx > -1:
             self.vx -= 0.2
-    
 class blast(Sprite):
     boom = ImageAsset("images/blast.png",
         Frame(0,0,8,8), 4,'horizontal')
-        
+    
     def __init__(self, position):
         super().__init__(blast.boom, position)
+        #boom.scale = 3
         self.newx = 0
         self.newy = 0
         self.blastgo = 0
         self.blastframe = 1
         self.setframe = 0 
-        SpaceGame.listenKeyEvent("keydown", "e", self.blastOn)
-
-    def step(self):
+        SpaceGame.listenKeyEvent("keydown", "enter", self.blastOn)
+        self.fxcenter = self.fycenter = 0.5
+    def step(self, w, h):
         self.setImage(self.blastframe)
         if self.blastgo == 1:
             if self.setframe == 21: 
                 self.blastgo = 0
                 self.setframe = 0
-                self.newx = randint(10, 900)
-                self.newy = randint(10, 520)
+                self.newx = randint(10, w)
+                self.newy = randint(10, h)
                 self.setImage(0)
                 self.x = -10
                 self.y = -10
@@ -135,7 +135,7 @@ class SpaceGame(App):
         SpaceShip((100,100))
         SpaceShip((150,150))
         SpaceShip((200,200))
-        blast((100,100))
+        blast((-10,-10))
     
     def step(self):
 
@@ -143,8 +143,8 @@ class SpaceGame(App):
             ship.step()
 
         for boom in self.getSpritesbyClass(blast):
-            boom.step()
-
+            boom.step(self.width, self.height)
+        boom.scale = 5
 myapp = SpaceGame()
 
 myapp.run()
