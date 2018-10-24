@@ -31,7 +31,7 @@ class SpaceShip(Sprite):
         SpaceGame.listenKeyEvent("keydown", "d", self.right)
         self.fxcenter = self.fycenter = 0.5
         
-    def step(self):
+    def step(self, w, h):
         self.x += self.vx
         self.y += self.vy
         self.rotation += self.vr
@@ -43,7 +43,10 @@ class SpaceShip(Sprite):
                 self.thrustframe = 1
         else:
             self.setImage(0)
-        
+        if self.x > w or self.x < 0:
+            self.vx = (self.vx * -1)
+        if self.y > h or self.y < 0:
+            self.vy = (self.vy *-1)
     def thrustOn(self, event):
         self.thrust = 1
         
@@ -135,15 +138,15 @@ class SpaceGame(App):
         SpaceShip((150,150))
         SpaceShip((200,200))
         blast((-10,-10))
-    
+        blast((-10,-10))
     def step(self):
 
         for ship in self.getSpritesbyClass(SpaceShip):
-            ship.step()
+            ship.step(self.width, self.height)
 
         for boom in self.getSpritesbyClass(blast):
             boom.step(self.width, self.height)
-        boom.scale = 5
+            boom.scale = 5
 myapp = SpaceGame()
 
 myapp.run()
