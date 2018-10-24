@@ -98,7 +98,9 @@ class blast(Sprite):
         if self.blastgo == 1:
             self.newx = random(0, self.width)
             self.newy = random(0, self.height)
-            self.setImage(self.blastframe-1)
+            print('asodfas0)')
+            self.setImage(self.blastframe)
+            print('asodfas0)')
 
   
     def blastOn(self, event):
