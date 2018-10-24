@@ -92,7 +92,6 @@ class blast(Sprite):
         SpaceGame.listenKeyEvent("keyup", "e", self.blastOff)
 
     def step(self):
-        print('z')
         self.x += 0
         self.y += 0
         self.setImage(self.blastframe)
@@ -100,7 +99,6 @@ class blast(Sprite):
             self.newx = random(0, self.width)
             self.newy = random(0, self.height)
             self.setImage(self.blastframe-1)
-        print('z')
 
   
     def blastOn(self, event):
@@ -132,10 +130,10 @@ class SpaceGame(App):
         print('s')
         for ship in self.getSpritesbyClass(SpaceShip):
             ship.step()
-            print('a2')
+            #print('a2')
         for boom in self.getSpritesbyClass(blast):
             boom.step()
-            print('r')
+            #print('r')
 myapp = SpaceGame()
 
 myapp.run()
