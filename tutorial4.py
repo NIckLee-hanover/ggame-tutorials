@@ -81,16 +81,16 @@ class SpaceShip(Sprite):
             self.vx -= 0.2
     
 class blast(Sprite):
-    boom = ImageAsset("images/four_spaceship_by_albertov_with_thrust.png",
-        Frame(0,0,10,10), 6, 'horizontal')
+    boom = ImageAsset("images/bunny.png",
+        Frame(0,0,10,10), 6,'vertical')
         
-    def __init__(blast, position):
+    def __init__(self, position):
         super().__init__(blast.boom, position)
         
-        self.blastframe = 1
+        self.blastframe = 4
         self.blastgo = 0
-        SpaceGame.listenKeyEvent("keydown", "enter", self.blastOn)
-        SpaceGame.listenKeyEvent("keyup", "enter", self.blastOff)
+        SpaceGame.listenKeyEvent("keydown", "e", self.blastOn)
+        SpaceGame.listenKeyEvent("keyup", "e", self.blastOff)
         self.fxcenter = self.fycenter = 0.5
     
     def blastOn(self, event):
@@ -100,8 +100,10 @@ class blast(Sprite):
         self.blastgo = 0
     
     def ah(self):
-        self.x = random(0, self.width)
-        self.y = random(0, self.height)
+        #self.x = random(0, self.width)
+        #self.y = random(0, self.height)
+        if blastgo == 1:
+            self.setImage(self.blastframe)
         
 class SpaceGame(App):
     """
@@ -117,6 +119,7 @@ class SpaceGame(App):
         SpaceShip((100,100))
         SpaceShip((150,150))
         SpaceShip((200,200))
+        blast((100,100))
     def step(self):
         for ship in self.getSpritesbyClass(SpaceShip):
             ship.step()
